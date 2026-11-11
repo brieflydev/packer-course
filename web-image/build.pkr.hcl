@@ -3,9 +3,11 @@ build {
   sources = ["source.docker.container"]
 
   provisioner "shell" {
-    inline = [
-      "apt-get update",
-      "DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends nginx",
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+    ]
+    scripts = [
+      "${path.root}/scripts/install-nginx.sh",
     ]
   }
 
