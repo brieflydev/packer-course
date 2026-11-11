@@ -10,7 +10,7 @@ build {
   }
 
   post-processor "docker-tag" {
-    repository = "nginx-web"
-    tags       = ["0.1.0"]
+    repository = var.image_name
+    tags       = [var.image_version]
   }
 }

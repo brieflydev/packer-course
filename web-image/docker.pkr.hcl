@@ -4,6 +4,7 @@ source "docker" "container" {
 
   changes = [
     "EXPOSE 80",
+    "LABEL org.opencontainers.image.version=${var.image_version}",
     "CMD [\"nginx\", \"-g\", \"daemon off;\"]",
   ]
 }
