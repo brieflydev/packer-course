@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>nginx-web ${version}</title>
+  </head>
+  <body>
+    <h1>Hello from a Packer-built image!</h1>
+    <p>Version: ${version}</p>
+    <p>Built with the ${builder} builder</p>
+  </body>
+</html>
