@@ -18,6 +18,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
+      "STATUS_PASSWORD=${var.status_password}",
     ]
     scripts = [
       "${path.root}/scripts/install-nginx.sh",
