@@ -25,3 +25,9 @@ variable "status_password" {
     error_message = "The status_password must be at least 12 characters long."
   }
 }
+
+variable "aws_region" {
+  type        = string
+  description = "Region where the AMI is built."
+  default     = "eu-central-1"
+}
