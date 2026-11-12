@@ -30,4 +30,12 @@ build {
     repository = var.image_name
     tags       = [var.image_version]
   }
+
+  post-processor "manifest" {
+    output     = "packer-manifest.json"
+    strip_path = true
+    custom_data = {
+      version = var.image_version
+    }
+  }
 }
