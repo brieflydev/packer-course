@@ -1,0 +1,50 @@
+name: packer
+
+on:
+  pull_request:
+    paths:
+      - "web-image/**"
+      - ".github/workflows/packer.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "web-image/**"
+      - ".github/workflows/packer.yml"
+
+permissions:
+  contents: read
+
+env:
+  PACKER_VERSION: "1.16.2"
+
+jobs:
+  validate:
+    name: fmt and validate
+    runs-on: ubuntu-24.04
+    defaults:
+      run:
+        working-directory: web-image
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup packer
+        uses: hashicorp/setup-packer@v3.4.0
+        with:
+          version: ${{ env.PACKER_VERSION }}
+
+      - name: Show version
+        run: packer version
+
+      - name: Install plugins
+        run: packer init .
+
+      - name: Check formatting
+        run: packer fmt -check -diff -recursive .
+
+      - name: Validate template
+        run: packer validate -var-file=dev.pkrvars.hcl .
+        env:
+          PKR_VAR_status_password: ci-placeholder-password
